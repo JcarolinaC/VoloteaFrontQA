@@ -17,3 +17,4 @@ public class OpenBrowser implements Task {
         return Tasks.instrumented(OpenBrowser.class);
     }
 }
+

@@ -4,9 +4,6 @@ Feature: check list
   To verify the selection function number of people traveling
 
   Scenario: check list
-
     Given the user is on the volotea page
-    And click on the passenger field
-    When the list is displayed
+    When click on the passenger
     Then check that this
-      | Adultos    | 1        |
