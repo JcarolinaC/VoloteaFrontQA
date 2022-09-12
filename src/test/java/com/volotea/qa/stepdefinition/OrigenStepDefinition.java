@@ -1,15 +1,23 @@
 package com.volotea.qa.stepdefinition;
 
+import com.volotea.qa.models.Destination;
+import com.volotea.qa.models.Origin;
+import com.volotea.qa.task.CityOfDestination;
+import com.volotea.qa.task.CityOfOrigin;
+import com.volotea.qa.task.Cookies;
 import com.volotea.qa.task.OpenBrowser;
 import cucumber.api.java.Before;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import net.serenitybdd.screenplay.GivenWhenThen;
 import net.serenitybdd.screenplay.abilities.BrowseTheWeb;
 import net.serenitybdd.screenplay.actors.Cast;
 import net.serenitybdd.screenplay.actors.OnStage;
 import net.thucydides.core.annotations.Managed;
 import org.openqa.selenium.WebDriver;
+
+import java.util.List;
 
 import static net.serenitybdd.screenplay.actors.OnStage.setTheStage;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
@@ -23,20 +31,29 @@ public class OrigenStepDefinition {
         setTheStage(Cast.whereEveryoneCan(BrowseTheWeb.with(myBrowser)));
         theActorCalled("Carolina Ceballos");
     }
+
     @Given("^click on the source field$")
     public void clickOnTheSourceField() {
         OnStage.theActorInTheSpotlight().wasAbleTo(OpenBrowser.browser());
 
     }
 
-    @When("^select the country option$")
-    public void selectTheCountryOption() {
-
+    @When("^to close cookies$")
+    public void toCloseCookies() {
+        OnStage.theActorInTheSpotlight().wasAbleTo(Cookies.cookies());
     }
 
-    @Then("^validate that a list with a box of countries is visible$")
-    public void validateThatAListWithABoxOfCountriesIsVisible() {
+    @When("^the user enter '(.*)' and the user enter '(.*)'$")
+    public void theUserEnterAndTheUserEnter(List<Origin> dataOrigin, List<Destination> dataDestination) {
+        OnStage.theActorInTheSpotlight().wasAbleTo(CityOfOrigin.cityOfOrigin(dataOrigin.get(0)));
+        OnStage.theActorInTheSpotlight().wasAbleTo(CityOfDestination.cityOfDestination(dataDestination.get(0)));
+    }
 
+    @Then("^the user should see the name '(.*)'$")
+    public void theUserShouldSeeTheName(String cityOrigin) {
+        OnStage.theActorInTheSpotlight().should(GivenWhenThen.seeThat(com.volotea.qa.question.Destination.message(), org.hamcrest.CoreMatchers.is(cityOrigin)));
     }
 }
+
+
 

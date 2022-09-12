@@ -5,16 +5,15 @@ import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
 import net.serenitybdd.screenplay.actions.Click;
 
-import static com.volotea.qa.userinterfaces.Passanger.*;
+import static com.volotea.qa.userinterfaces.Passanger.SELECT_PASSANGER;
 
-public class SelectPassenger implements Task {
+public class AddPassenger implements Task {
 
     @Override
     public <T extends Actor> void performAs(T actor){
-        actor.attemptsTo(Click.on(SELECT_KIDS));
+        actor.attemptsTo(Click.on(SELECT_PASSANGER));
     }
-    public static SelectPassenger selectPassenger(){
-        return Tasks.instrumented(SelectPassenger.class);
+    public static AddPassenger addPassenger(){
+        return Tasks.instrumented(AddPassenger.class);
     }
 }
-

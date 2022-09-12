@@ -3,9 +3,17 @@ Feature: destination countries
   I want to Select the destination countries
   To verify the selection
 
-  Scenario: country box
-
+  Background: cookies
     Given the user is on the volotea page
-    And click on the source field
-    When select the country option
-    Then validate that a list with a box of countries is visible
+    When to close cookies
+
+  Scenario Outline: country box
+    When the user enter '<Start>' and the user enter '<Finish>'
+    Then the user should see the name '<Country>'
+    Examples:
+      | Start    | Finish   | Country |
+      | Alicante | Asturias | ESPAÑA  |
+      | Bastia   | Caen     | FRANCIA |
+
+
+
